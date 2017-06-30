@@ -1,18 +1,82 @@
-const bamazon = (function (){
+const bamazon = (function() {
 
-	const keys = require('./keys.js');
-	const mySQL = require('mySQL');
-	const inquirer = require ('inquirer');
+    const keys = require('./keys.js');
+    const mySQL = require('mySQL');
+    const inquirer = require('inquirer');
+    const Table = require('easy-table');
 
-	let connection = mySQL.createConnection(keys.sqlConfig);
+    const connection = mySQL.createConnection(keys.sqlConfig);
 
-	connection.connect();
+    connection.connect();
 
-	connection.query('SELECT * FROM bamazon.products', function (err, results,fields){
-		if(err) console.log(err);
+    let snapQuery = `SELECT item_id AS ID
+    					, product_name AS Product
+    					, price AS Price
+    			 FROM bamazon.products`
 
-		console.log(results);
-	})
+    connection.query(snapQuery, function(err, results, fields) {
+        if (err) return console.log(err);
+        console.log(Table.print(results));
+        inquirerInitial();
+    });
 
-	connection.end();
+    let inquirerInitial = function() {
+        inquirer.prompt([{
+            type: 'input',
+            name: 'itemID',
+            message: 'Please enter the id of the item you would like to purchase:'
+        }, {
+            type: 'input',
+            name: 'quantityRequested',
+            message: 'How many units would you like you to purchase?'
+        }]).then(function(userInput) {
+            let itemID = userInput.itemID;
+            let quantityReq = userInput.quantityRequested;
+
+            let reqQuery = `SELECT item_id AS ID
+    							, product_name AS Product
+    							, price AS Price
+    							, stock_quantity AS Stock
+    					FROM bamazon.products
+    					WHERE item_id = ?`;
+            let reqValues = [itemID];
+
+            connection.query(reqQuery, reqValues, function(err, results) {
+
+                let currentStock = results[0].Stock;
+                let productName = results[0].Product;
+                let itemID = results[0].ID;
+                let price = results[0].Price;
+
+                if (err) return console.log(err);
+                if (currentStock < quantityReq) {
+                    console.log(`We currently do not have ${quantityReq} ${productName}(s) available for purchase. Please check in again at a later time.`)
+                } else if (currentStock >= quantityReq) {
+                	let newStockLevel = currentStock - quantityReq;
+                	let totalCost = quantityReq * price;
+
+                	let updateQuery = `UPDATE bamazon.products
+                						  SET stock_quantity = ?
+                						WHERE item_id = ?`;
+                	let updateValue = [newStockLevel, itemID]
+
+                	connection.query(updateQuery, updateValue, function (err, results){
+
+                		if (err) return console.log(err);
+
+                  		if (results.changedRows === 0){
+                			console.log('Boo something did\'t work');
+                		} else if (results.changedRows > 0){
+                			let resultsArray = [{'Product':productName, 'Quantity':quantityReq, 'Total':totalCost}]
+                			console.log(Table.print(resultsArray));
+                		};
+
+                		connection.end();
+                	})
+                }
+            })
+            // connection.end();
+        })
+    }
+
 })();
