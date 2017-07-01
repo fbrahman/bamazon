@@ -1,3 +1,4 @@
+
 DROP DATABASE IF EXISTS bamazon;
 
 CREATE DATABASE bamazon;
@@ -10,6 +11,7 @@ CREATE TABLE products (
     , department_name VARCHAR(30)
     , price FLOAT (6,2)
     , stock_quantity INTEGER(2) DEFAULT 0
+    , product_sales INTEGER (6) DEFAULT 0
     , PRIMARY KEY (item_id)
 );
 
@@ -17,7 +19,7 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 	VALUES ("Nintendo Switch", "Electronics", 299.99, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-	VALUES ("Sofa", "furniture", 343.99, 25);
+	VALUES ("Sofa", "Furniture", 343.99, 25);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 	VALUES ("Bean Bag Chair", "Furniture", 39.99, 50);
@@ -41,7 +43,32 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 	VALUES ("Bandages", "Health", 2.79, 50);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-	VALUES ("Hydrogen Peroxide", "Bath", 0.97, 70);
+	VALUES ("Hydrogen Peroxide", "Health", 0.97, 70);
+    
+CREATE TABLE departments (
+	department_id INTEGER(3) AUTO_INCREMENT NOT NULL
+    , department_name VARCHAR (30) NOT NULL
+    , over_head_costs INTEGER (6) DEFAULT 0
+    , PRIMARY KEY (department_id)
+    );
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Electronics", 10000);
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Furniture", 30000);
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Appliances", 20000);
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Bath", 40000);
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Health", 10000);
+
+INSERT INTO departments (department_name, over_head_costs)
+	VALUES ("Kitchen", 70000);
 
 
 

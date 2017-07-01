@@ -37,15 +37,18 @@ const bamazonCustomer = (function() {
     							, product_name AS Product
     							, price AS Price
     							, stock_quantity AS Stock
+    							, product_sales AS Sales
     						FROM bamazon.products
     						WHERE item_id = ?`;
             let reqValues = [itemID];
 
             connection.query(reqQuery, reqValues, function(err, results) {
+
                 let currentStock = results[0].Stock;
                 let productName = results[0].Product;
                 let itemID = results[0].ID;
                 let price = results[0].Price;
+                let currSales = results[0].Sales;
 
                 if (err) return console.log(err);
                 if (currentStock < quantityReq) {
@@ -53,11 +56,13 @@ const bamazonCustomer = (function() {
                 } else if (currentStock >= quantityReq) {
                     let newStockLevel = currentStock - quantityReq;
                     let totalCost = quantityReq * price;
+                    let totalSales = currSales + totalCost;
 
                     let updateQuery = `UPDATE bamazon.products
                 						  SET stock_quantity = ?
+                						  	  , product_sales = ?
                 						WHERE item_id = ?`;
-                    let updateValue = [newStockLevel, itemID]
+                    let updateValue = [newStockLevel, totalSales, itemID]
 
                     connection.query(updateQuery, updateValue, function(err, results) {
 
