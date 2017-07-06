@@ -16,7 +16,7 @@ const bamazonCustomer = (function() {
 
     connection.query(snapQuery, function(err, results, fields) {
         if (err) return console.log(err);
-        console.log(Table.print(results));
+        console.log('\n'+Table.print(results));
         inquirerInitial();
     });
 
@@ -52,7 +52,8 @@ const bamazonCustomer = (function() {
 
                 if (err) return console.log(err);
                 if (currentStock < quantityReq) {
-                    console.log(`We currently do not have ${quantityReq} ${productName}(s) available for purchase. Please check in again at a later time.`)
+                    console.log(`\nWe currently do not have ${quantityReq} ${productName}(s) available for purchase. Please check in again at a later time.`)
+                    connection.end();
                 } else if (currentStock >= quantityReq) {
                     let newStockLevel = currentStock - quantityReq;
                     let totalCost = quantityReq * price;
@@ -72,7 +73,7 @@ const bamazonCustomer = (function() {
                             console.log('Boo something did\'t work');
                         } else if (results.changedRows > 0) {
                             let resultsArray = [{ 'Product': productName, 'Quantity': quantityReq, 'Total': totalCost }]
-                            console.log(Table.print(resultsArray));
+                            console.log('\n'+Table.print(resultsArray));
                         };
                         connection.end();
                     })

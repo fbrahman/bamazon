@@ -42,7 +42,6 @@ const bamazonManager = (function() {
     };
 
     const viewProducts = function(callback) {
-        // connection.connect();
         let query = `SELECT * 
         			 FROM bamazon.products`
 
@@ -57,7 +56,6 @@ const bamazonManager = (function() {
     };
 
     const viewLowInventory = function(callback) {
-        // connection.connect();
         let query = `SELECT * 
         			 FROM bamazon.products
         			 WHERE stock_quantity < 5`
@@ -89,8 +87,6 @@ const bamazonManager = (function() {
 
             let itemID = userInput.itemID;
             let addStock = userInput.additionalStock;
-            // let newStock = stock_quantity + addStock;
-
 
             let stockQuery = `UPDATE bamazon.products
             					 SET stock_quantity = stock_quantity + ?
@@ -98,8 +94,6 @@ const bamazonManager = (function() {
             let stockValue = [addStock, itemID];
 
             connection.query(stockQuery, stockValue, function(err, results) {
-                // connection.connect();
-                // console.log(results);
                 if (err) { console.log(err) };
 
                 if (results.changedRows === 0) {

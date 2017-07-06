@@ -34,7 +34,7 @@ const bamazonSupervisor = (function() {
     };
 
     const viewDeptSales = function(callback) {
-        // connection.connect();
+        
         let query = `SELECT b.department_id
                             , b.department_name
                             , b.over_head_costs
