@@ -41,8 +41,13 @@ const bamazonManager = (function() {
         }
     };
 
+    // the item IDs, names, prices, and quantities
+
     const viewProducts = function(callback) {
-        let query = `SELECT * 
+        let query = `SELECT item_id AS ID
+    							, product_name AS Product
+    							, price AS Price
+    							, stock_quantity AS Stock
         			 FROM bamazon.products`
 
         connection.query(query, function(err, results) {
@@ -56,7 +61,10 @@ const bamazonManager = (function() {
     };
 
     const viewLowInventory = function(callback) {
-        let query = `SELECT * 
+        let query = `SELECT item_id AS ID
+    							, product_name AS Product
+    							, price AS Price
+    							, stock_quantity AS Stock 
         			 FROM bamazon.products
         			 WHERE stock_quantity < 5`
 
@@ -100,7 +108,9 @@ const bamazonManager = (function() {
                     console.log('Boo something did\'t work');
                 } else if (results.changedRows > 0) {
 
-                    let updateQuery = `SELECT * 
+                    let updateQuery = `SELECT item_id AS ID
+    											, product_name AS Product
+    											, stock_quantity AS Stock  
                 					   FROM bamazon.products
                 					   WHERE item_id =?`;
                     let updateValue = [itemID];
@@ -133,7 +143,7 @@ const bamazonManager = (function() {
             }, {
                 type: 'input',
                 name: 'stock',
-                message: 'Please enter the currect stock of the product:'
+                message: 'Please enter the current stock of the product:'
             }
 
         ]).then(function(userInput) {
@@ -155,7 +165,11 @@ const bamazonManager = (function() {
                 if (err) { console.log(err) };
                 let newItemID = results.insertId
 
-                let addedQuery = `SELECT *
+                let addedQuery = `SELECT item_id AS ID
+    										, product_name AS Product
+    										, department_name AS Department
+    										, price AS Price
+    										, stock_quantity AS Stock 
                 				  FROM bamazon.products
                 				  WHERE item_id = ?`;
                 let addedValue = [newItemID];

@@ -37,7 +37,7 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 	VALUES ("Shower Curtain", "Bath", 19.99, 50);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-	VALUES ("Projector", "Electronics", 419.00, 15);
+	VALUES ("Projector", "Electronics", 419.00, 4);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 	VALUES ("Bandages", "Health", 2.79, 50);
@@ -53,22 +53,22 @@ CREATE TABLE departments (
     );
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Electronics", 10000);
+	VALUES ("Electronics", 1000);
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Furniture", 30000);
+	VALUES ("Furniture", 3000);
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Appliances", 20000);
+	VALUES ("Appliances", 2000);
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Bath", 40000);
+	VALUES ("Bath", 4000);
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Health", 10000);
+	VALUES ("Health", 1000);
 
 INSERT INTO departments (department_name, over_head_costs)
-	VALUES ("Kitchen", 70000);
+	VALUES ("Kitchen", 7000);
 
 
 
