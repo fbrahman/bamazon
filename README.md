@@ -10,7 +10,7 @@ In this activity, you'll be creating an Amazon-like storefront with the MySQL sk
 ![Success!](images/customerSuccessful.png)
 
 #### Out of inventory response
-![Out of inventory](images/customerUnsuccessul.png)
+![Out of inventory](images/customerUnsuccessful.png)
 
 ### Challenge #2: Manager View (Next Level)
 
