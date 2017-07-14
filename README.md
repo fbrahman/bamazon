@@ -7,10 +7,10 @@ In this activity, you'll be creating an Amazon-like storefront with the MySQL sk
 ## Challenges
 ### Challenge #1: Customer View (Minimum Requirement)
 #### Succesful customer transaction
-(images/customerSuccessful.png)
+![Success!](images/customerSuccessful.png)
 
 #### Out of inventory response
-(images/customerUnsuccessul.png)
+![Out of inventory](images/customerUnsuccessul.png)
 
 ### Challenge #2: Manager View (Next Level)
 
