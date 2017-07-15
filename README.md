@@ -17,7 +17,7 @@ Bamazon is an Amazon-like storefront using MySQL to track inventory. The Bamazon
 #### Manager Menu
 ![Manager Menu](images/managerMenu.png)
 
-#### View products for sale - list all products for sale with associated stock levels.
+#### View products for sale - list all products for sale with stock levels.
 ![Manager view product](images/managerViewProducts.png)
 
 #### View low inventory - list all products with inventory lower than five.
@@ -26,7 +26,7 @@ Bamazon is an Amazon-like storefront using MySQL to track inventory. The Bamazon
 #### Add to inventory - increase stock of a selected item.
 ![Increase stock](images/managerAddInventory.png)
 
-#### Add new product - add a new product.
+#### Add new product 
 ![Add new product](images/managerAddProduct.png)
 
 ### Challenge #3: Supervisor View (Final Level)
@@ -36,7 +36,7 @@ Bamazon is an Amazon-like storefront using MySQL to track inventory. The Bamazon
 #### View product sales by department - view total sales by department
 ![Supervisor Product sales by dept](images/supervisorProductSales.png) 
 
-#### Create new department - Create a new department
+#### Create new department
 ![Supervisor Add dept](images/supervisorAddDept.png)
 
 ## Copyright
